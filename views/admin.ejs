@@ -1,0 +1,24 @@
+<%- include('templates/header') %>
+
+<div class="container mt-5">
+  <h1>Admin Page</h1>
+  <p>Welcome to the admin page! Only authorized users can see this.</p>
+</div>
+
+<ul>
+  <% users.forEach(user => { %>
+    <li class="items my-2">
+      <%= user.username %>: <%= user.email %>: <%= user.type %>
+          <form method="POST" action="/promote">
+            <input type="hidden" name="email" value="<%= user.email %>">
+            <button type="submit" class="btn btn-primary data-mdb-ripple-init my-2">Promote to admin</button>
+          </form>
+          <form method="POST" action="/demote">
+            <input type="hidden" name="email" value="<%= user.email %>">
+            <button type="submit" class="btn btn-danger data-mdb-ripple-init my-2">Demote to user</button>
+          </form>
+    </li>
+  <% }); %>
+</ul>
+
+<%- include('templates/footer') %>
